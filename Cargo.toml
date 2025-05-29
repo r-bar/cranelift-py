@@ -1,0 +1,15 @@
+[package]
+edition = "2021"
+name = "cranelift-py"
+version = "0.1.0"
+
+description = "Cranelift Python bindings"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+name = "cranelift"
+
+[dependencies]
+cl = {package = "cranelift", version = "0.120.0", features = ["core", "interpreter", "jit", "module", "native", "object"]}
+pyo3 = "0.24.0"
