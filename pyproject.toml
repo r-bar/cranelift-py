@@ -1,5 +1,6 @@
 [project]
 name = "cranelift-py"
+version = "0.2.0"
 
 classifiers = [
   "Programming Language :: Rust",
