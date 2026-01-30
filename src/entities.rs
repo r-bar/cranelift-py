@@ -135,8 +135,6 @@ enum_wrap!(Linkage, cl::module::Linkage, {
 enum_wrap!(CallConv, cl::codegen::isa::CallConv, {
     /// Best performance, not ABI-stable.
     Fast,
-    /// Smallest caller code size, not ABI-stable.
-    Cold,
     /// Supports tail calls, not ABI-stable except for exception
     /// payload registers.
     ///
@@ -166,6 +164,8 @@ enum_wrap!(CallConv, cl::codegen::isa::CallConv, {
     /// defines no callee-save registers, and restricts the number of return
     /// registers to one integer, and one floating point.
     Winch,
+    /// Preserve all registers.
+    PreserveAll,
 });
 
 macro_rules! int_wrap {

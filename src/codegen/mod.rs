@@ -100,14 +100,8 @@ impl FunctionBuilder {
         self.fb.seal_all_blocks();
     }
 
-    pub fn try_declare_var(&mut self, var: Variable, ty: Type) -> PyResult<()> {
-        self.fb.try_declare_var(var.into(), ty.into()).map_err(|e| {
-            pyo3::exceptions::PyValueError::new_err(format!("Failed to declare variable: {}", e))
-        })
-    }
-
-    pub fn declare_var(&mut self, var: Variable, ty: Type) {
-        self.fb.declare_var(var.into(), ty.into());
+    pub fn declare_var(&mut self, ty: Type) -> Variable {
+        self.fb.declare_var(ty.into()).into()
     }
 
     pub fn declare_var_needs_stack_map(&mut self, var: Variable) {
@@ -226,6 +220,7 @@ impl FunctionBuilder {
                 name: name.into(),
                 signature: signature.clone().into(),
                 colocated,
+                patchable: false,
             })
             .into())
     }
@@ -681,11 +676,11 @@ impl FunctionBuilder {
     // pub fn &mut self, ins_f128const<T1: Into<ir::Constant>>(N: T1) -> Value { self.fb.ins(). f128const().into() }
 
     pub fn ins_vconst(&mut self, txn: Type, constant: Constant) -> Value {
-        self.fb.ins().vconst(txn.into(), constant).into()
+        self.fb.ins().vconst(txn.into(), constant.into()).into()
     }
 
     pub fn ins_shuffle(&mut self, a: Value, b: Value, imm: Immediate) -> Value {
-        self.fb.ins().shuffle(a.into(), b.into(), imm).into()
+        self.fb.ins().shuffle(a.into(), b.into(), imm.into()).into()
     }
 
     pub fn ins_nop(&mut self) -> Inst {

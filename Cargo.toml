@@ -11,5 +11,5 @@ crate-type = ["cdylib"]
 name = "cranelift"
 
 [dependencies]
-cl = {package = "cranelift", version = "0.120.0", features = ["core", "interpreter", "jit", "module", "native", "object"]}
-pyo3 = "0.24.0"
+cl = {package = "cranelift", version = "0.128.1", features = ["core", "interpreter", "jit", "module", "native", "object"]}
+pyo3 = "0.27.2"
